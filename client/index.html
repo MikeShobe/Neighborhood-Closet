@@ -5,65 +5,15 @@
   <meta charset="UTF-8">
   <title>Neighborhood Clozet Sign Up</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-
-  <style>/*PUT STYLE IN CSS SHEET*/
-    body {
-      padding-bottom: 40px;
-      background-color: #eee;
-    }
-    .form-signin {
-      max-width: 330px;
-      padding: 15px;
-      margin: 0 auto;
-    }
-    .form-signin .form-signin-heading,
-    .form-signin .checkbox {
-      margin-bottom: 10px;
-    }
-    .form-signin .checkbox {
-      font-weight: normal;
-    }
-    .form-signin .form-control {
-      position: relative;
-      height: auto;
-      -webkit-box-sizing: border-box;
-      -moz-box-sizing: border-box;
-      box-sizing: border-box;
-      padding: 10px;
-      font-size: 16px;
-    }
-    .form-signin .form-control:focus {
-      z-index: 2;
-    }
-    .form-signin input[type="email"] {
-      margin-bottom: -1px;
-      border-bottom-right-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-    .form-signin input[type="password"] {
-      margin-bottom: 10px;
-      border-top-left-radius: 0;
-      border-top-right-radius: 0;
-    }
-    .alt-sign-in {
-      padding: 5px 0 10px;
-    }
-    .col-xs-12 {
-      height: 100;
-    }
-    .images {
-      height: 300 px;
-      width: 300 px;
-    }
-  </style>
 
 </head>
 
 <body>
   <div class="container-fluid">
     <div class="row">
-      <div class="col-xs-12 text-center bg-primary" style="background-color: MediumTurquoise">
+      <div class="col-xs-12 text-center bg-primary">
         <h1>Welcome to Neighborhood Clozet!</h1>
         <h2>Lets get your closet organized.<br><br></h2>
       </div>
@@ -72,9 +22,9 @@
   <div class="container">
 
     <form class="form-signin">
-      <h2 class="form-signin-heading" style="align: center">     Please sign in</h2>
+      <h2 class="form-signin-heading" style="align: center">Please sign in</h2>
 
-      <button style="background-color: green" class="btn btn-info btn-block"><a href="/auth/facebook" style="color: white; text-decoration: none;"> Sign in with Facebook </a></button>
+      <button style="background-color: green" class="btn btn-info btn-block"><a href="/auth/facebook"> Sign in with Facebook </a></button>
       <div class="col-xs-12 text-center btn-block alt-sign-in">OR</div>
       <label for="inputEmail" class="sr-only">Email address</label>
       <input type="email" id="inputEmail" class="form-control" placeholder="Email address" autofocus>
@@ -86,7 +36,7 @@
         </label>
       </div>
       <button style="background-color: green" class="btn btn-lg btn-primary btn-block" type="submit">
-        <a href="/auth/facebook" style="color: white; text-decoration: none;">Sign in</a></button>
+        <a href="/auth/facebook">Sign in</a></button>
 
     </form>
 
