@@ -4,8 +4,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
-var FACEBOOK_APP_ID = '120609078282934';
+//***ID & SECRET NEED TO BE HIDDEN
+var FACEBOOK_APP_ID = '120609078282934';//NPM module 'config'
 var FACEBOOK_APP_SECRET = '6007cc397e47b966843dbaec826cd3c7';
+//***ID & SECRET NEED TO BE HIDDEN
 var bodyParser = require('body-parser');
 var path = require('path');
 var multer  = require('multer');
@@ -18,8 +20,6 @@ app.use(passport.session());
 app.use(bodyParser.json());
 
 app.post('/search', function(req, res) {
-  console.log('hi');
-  console.log(req.body);
   searchObj = {};
   searchObj.category = req.body.category;
   if (req.body.itemColor) {
@@ -39,14 +39,12 @@ app.post('/search', function(req, res) {
       throw err;
     }
     else {
-       // console.log(results);
       res.send(results);
     }
   })
 });
 
 app.use('/', express.static(__dirname + '/../client'));
-
 
 mongoose.connect('mongodb://clozet:clozet@ds035593.mongolab.com:35593/clozet',function(err){
  if(err) throw err;
@@ -79,7 +77,7 @@ app.use(multer({ dest: './uploads/',
 /*Handling routes.*/
 
 
-app.post('/api/photo',function(req,res){
+app.post('/api/photo',function(req,res){//Set up Controller file/function instead of anonymous function
   if(done==true){
 
     var newItem = new Item({
@@ -128,12 +126,12 @@ app.post('/api/outfits', function(req,res){
   res.render('.client/outfits.html');
 });
 
-
+//***PASSPORT SHOULD BE IN SEPARATE FILE
 //setting up OAuth facebook login
 passport.use(new FacebookStrategy({
   clientID: FACEBOOK_APP_ID,
   clientSecret: FACEBOOK_APP_SECRET,
-  callbackURL: 'http://localhost:3000/auth/facebook/callback'
+  callbackURL: 'http://localhost:3000/auth/facebook/callback'//Put into 'config', needs proper path/hostS
  }, function(accessToken, refreshToken, profile, done) {
       process.nextTick(function() {
       done(null, profile);
@@ -165,9 +163,10 @@ passport.serializeUser(function(user, done) {
 passport.deserializeUser(function(obj, done) {
  done(null, obj);
 });
-
+//***PASSPORT SHOULD BE IN SEPARATE FILE
 
 //will store facebook given _id and name. closet_id === _id
+//***EACH Schema need to be in different file***
 var userSchema = new Schema({
  _id: {type:String,required: true},
  username:{ type: String, required: true, index: { unique: true } },
@@ -205,6 +204,7 @@ var User = mongoose.model('User',userSchema);
 var Closet = mongoose.model('Closet',closetSchema);
 var Item = mongoose.model('Clothes',ItemSchema);
 var Outfit = mongoose.model('Outfit',OutfitSchema);
+//***EACH Schema need to be in different file***
 
 app.get('/api/photo', function(req, res, next) {
  res.sendFile('./client/api/photo');
@@ -263,7 +263,6 @@ Item.find({}, function(err, clothes){
  // });
 });
 
-
 /**
 //request for an outfit suggestion
 //every request should carry the users id
@@ -277,8 +276,7 @@ function matchClothes(shirt,bottom,shoes,accessories){
 }
 */
 
-app.listen(3000);
-
+app.listen(process.env.PORT || 3000);
 
 // 2urfiv8@dispostable.com
 // f75766595b3bf7d

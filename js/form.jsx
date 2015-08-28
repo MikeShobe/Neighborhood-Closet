@@ -1,7 +1,5 @@
-
 var React = require('react');
 var $ = require('jquery');
-
 var Form = React.createClass({
 
 	render: function() {
@@ -32,4 +30,5 @@ var Form = React.createClass({
 			</div>
 	)}
 });
+
 module.exports = Form;

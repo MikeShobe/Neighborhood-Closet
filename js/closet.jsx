@@ -20,7 +20,10 @@ var Closet = React.createClass({
       slidersArr.push(<Slider shelvesArr = {this.state.closetObj[key]} />);
     }
 
-    return(<div>{slidersArr}</div>);
+    return(
+      <div>
+      {slidersArr}
+      </div>);
   }
 });
 

@@ -37,4 +37,5 @@ var Outfit = React.createClass({
 			</div>
 	)}
 });
+
 module.exports = Outfit;

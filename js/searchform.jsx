@@ -1,4 +1,3 @@
-
 var React = require('react');
 var $ = require('jquery');
 
@@ -8,7 +7,7 @@ var SearchForm = React.createClass({
     return {
       ids: [],
       images: [],
-      itemColor: "",
+      itemColor: "",//stick into single Item object
       itemWarmth: "",
       itemPattern: "",
       itemFormality: ""
@@ -23,7 +22,6 @@ var SearchForm = React.createClass({
       itemFormality: e.target.itemFormality
     });
   },
-
 
   handle: function (e) {
     var that = this;
@@ -51,7 +49,6 @@ var SearchForm = React.createClass({
     //     console.log(that.state);
     //     // that.props.update(that.state.images);
     //   });
-
 
     $.ajax({
       url: '/search',
@@ -93,4 +90,5 @@ var SearchForm = React.createClass({
       </div>
   )}
 });
+
 module.exports = SearchForm;
