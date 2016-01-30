@@ -10,7 +10,7 @@ var done = false;
 var upload = multer({dest: 'uploads/'});
 var fs = require('fs');
 
-var config = require('config.js');
+var config = require(__dirname + '/config/config.js');
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var FACEBOOK_APP_ID = config.facebook.app_id;
