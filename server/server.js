@@ -2,18 +2,21 @@ var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var passport = require('passport');
-var FacebookStrategy = require('passport-facebook').Strategy;
-//***ID & SECRET NEED TO BE HIDDEN
-var FACEBOOK_APP_ID = '120609078282934';//NPM module 'config'
-var FACEBOOK_APP_SECRET = '6007cc397e47b966843dbaec826cd3c7';
-//***ID & SECRET NEED TO BE HIDDEN
+
 var bodyParser = require('body-parser');
 var path = require('path');
 var multer  = require('multer');
 var done = false;
 var upload = multer({dest: 'uploads/'});
 var fs = require('fs');
+
+var config = require('config.js');
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
+var FACEBOOK_APP_ID = config.facebook.app_id;
+var FACEBOOK_APP_SECRET = config.facebook.app_secret;
+var FACEBOOK_URL = config.facebook.url;
+
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -54,10 +57,6 @@ mongoose.connect('mongodb://clozet:clozet@ds035593.mongolab.com:35593/clozet',fu
 
 /*Configure the multer.*/
 
-// app.post('/profile', upload.single('avatar'), function(req,res,nest){
-//   console.log('body to porofile ' + req.body );
-// })
-
 app.use(multer({ dest: './uploads/',
   rename: function (fieldname, filename) {
     return filename+ '-' +Date.now();
@@ -75,8 +74,6 @@ app.use(multer({ dest: './uploads/',
 }));
 
 /*Handling routes.*/
-
-
 app.post('/api/photo',function(req,res){//Set up Controller file/function instead of anonymous function
   if(done==true){
 
@@ -126,12 +123,11 @@ app.post('/api/outfits', function(req,res){
   res.render('.client/outfits.html');
 });
 
-//***PASSPORT SHOULD BE IN SEPARATE FILE
 //setting up OAuth facebook login
 passport.use(new FacebookStrategy({
   clientID: FACEBOOK_APP_ID,
   clientSecret: FACEBOOK_APP_SECRET,
-  callbackURL: 'http://localhost:3000/auth/facebook/callback'//Put into 'config', needs proper path/hostS
+  callbackURL: FACEBOOK_URL //needs proper path/hostS
  }, function(accessToken, refreshToken, profile, done) {
       process.nextTick(function() {
       done(null, profile);
@@ -144,7 +140,6 @@ passport.use(new FacebookStrategy({
       var userCloset = new Closet({
         closet_id: profile._json.id
       });
-
 
       fbUser.save(function(){
         console.log('user saved to database');
@@ -209,10 +204,11 @@ var Outfit = mongoose.model('Outfit',OutfitSchema);
 app.get('/api/photo', function(req, res, next) {
  res.sendFile('./client/api/photo');
 });
+
 app.get('/success', function(req, res, next) {
  res.sendfile('./client/Profile.html');
- //console.log('req.body info from /success' + req.body);
 });
+
 app.get('/error', function(req, res, next) {
  res.sendFile('./client/error.html');
 });
@@ -228,56 +224,15 @@ app.get('./outfits', function(req,res){
   res.sendFile('./client/outfits.html');
 })
 
-//login request
-// app.post('',function(req,res){
-// //  var closet_id = req.body.id;
-//  var user = new User({
-//    _id :req.body.id,
-//    username:req.body.name,
-//    closet_id: req.body.id
-//  });
-//
-//  res.send('should send back user Id? as a cookie?!!' + user.closet_id);
-// });
-
 //when the user logs in they should receive the clothes in their closet
 app.get('/closet',function(req,res){
  //get profile for each user
  //get the users closet object of arrays holding objects
-
-  // User.find({}, function(err, blah){
-  //   console.log(blah);
-  // })
 Item.find({}, function(err, clothes){
   console.log('item is  : ' + clothes);
   res.send(clothes);
 })
 
-//ideally want to find that user then their closet
- // User.findOne({_id: req.body.closet_id},function(err,closetId){
- //   Closet.findOne({closet_id: closetId.closetId}, function(err,fullCloset){
- //     if(err) throw err;
- //     res.send(fullCloset);//should send back a large object of arrays
- //   });
- //
- // });
 });
-
-/**
-//request for an outfit suggestion
-//every request should carry the users id
-app.get('/', function(req,res){
- Closet.findOne({closet_id: req.body._id},function(err,fullCloset){
-   matchClothes(fullCloset.)
- });
-});
-function matchClothes(shirt,bottom,shoes,accessories){
- //??
-}
-*/
 
 app.listen(process.env.PORT || 3000);
-
-// 2urfiv8@dispostable.com
-// f75766595b3bf7d
-// 18d8061f95aef64c8845d06d4fc01cd666d9ab49

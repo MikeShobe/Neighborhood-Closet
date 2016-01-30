@@ -1,5 +1,4 @@
 var React = require('react');
-var Slider = require('./slider.jsx');
 var Form = require('./form.jsx');
 var Outfit = require('./outfits.jsx');
 var Closet = require('./closet.jsx');

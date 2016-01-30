@@ -5,7 +5,7 @@ var Form = React.createClass({
 	render: function() {
 		return(
 			<div className="row text-center">
-				<div className="col-xs-12 col-sm-12 col-md-10 col-md-offset-2">
+				<div className="col-xs-12 col-md-10 col-md-offset-1">
 					<form encType="multipart/form-data" action="/api/photo" method="post" className="form-inline">
     				<select name="category" className="form-control">
 		    			<option value="tops">Top</option>

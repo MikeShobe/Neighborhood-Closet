@@ -21,7 +21,7 @@ var Outfit = React.createClass({
 	  	console.log(imgs)
 	  	return(
 	    	<div className="row text-center">
-				<div className="col-xs-12 col-sm-12 col-md-10 col-md-offset-2">
+				<div className="col-xs-12 col-sm-12 col-md-10 col-md-offset-1">
 					<form encType="multipart/form-data" action="/api/outfits" method="post" className="form-inline">
 						<div>
 		    			<input type="text" placeholder="Top" name="Top" className="form-control" />

@@ -1,6 +1,5 @@
 var React = require('react');
 
-
 var Images = React.createClass({
   render: function(){
     return(

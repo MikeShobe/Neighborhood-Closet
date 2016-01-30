@@ -2,7 +2,6 @@ var React = require('react');
 var $ = require('jquery');
 
 var SearchForm = React.createClass({
-
   getInitialState: function () {
     return {
       ids: [],
@@ -37,18 +36,6 @@ var SearchForm = React.createClass({
     sendObject.itemPattern = e.target[3].value;
     sendObject.itemFormality = e.target[4].value;
     console.log(sendObject);
-    // $.post('/search', sendObject,
-    //   function (data) {
-    //     console.log(temp1)
-    //     console.log(data);
-    //     that.setState({images: [], ids: []} );
-    //     for (var i = 0; i < data.length; i++) {
-    //       that.state.images.push(data[i].img);
-    //       that.state.ids.push(data[i]._id);
-    //     }
-    //     console.log(that.state);
-    //     // that.props.update(that.state.images);
-    //   });
 
     $.ajax({
       url: '/search',
@@ -68,7 +55,7 @@ var SearchForm = React.createClass({
   render: function() {
     return(
       <div className="row text-center">
-        <div className="col-xs-12 col-sm-12 col-md-10 col-md-offset-2">
+        <div className="col-xs-12 col-md-10 col-md-offset-1">
           <form id="searchForm" encType="multipart/form-data" onSubmit={this.handle} className="form-inline">
             <select name="category" className="form-control">
               <option value="tops">Top</option>

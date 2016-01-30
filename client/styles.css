@@ -12,8 +12,12 @@ a {
   text-decoration: none;
 }
 
+h2 {
+  text-align: center;
+}
+
 .images {
-  height: 300 px; /*auto height?*/
+  height: 300 px;
   width: 300 px;
 }
 
